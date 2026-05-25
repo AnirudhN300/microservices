@@ -15,7 +15,26 @@ service:
 
 # NGINX Ingress Configuration
 ingress:
-  enabled: false
+  enabled: true
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "8m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    # Basic proxy headers using individual annotations
+    nginx.ingress.kubernetes.io/proxy-set-header: "X-Real-IP $remote_addr"
+    # Cert-manager annotations
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - retail-store.iemafzalhassan.in
+  tls:
+    - hosts:
+        - retail-store.iemafzalhassan.in
+      secretName: retail-store-tls
+
 # Application configuration
 app:
   endpoints:
