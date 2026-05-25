@@ -16,6 +16,9 @@ orders:
 
 ui:
   fullnameOverride: ui
+
+  service:
+     type: LoadBalancer
   app:
     endpoints:
       catalog: http://catalog:80
