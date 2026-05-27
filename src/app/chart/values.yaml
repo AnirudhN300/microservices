@@ -25,3 +25,6 @@ ui:
       carts: http://carts:80
       checkout: http://checkout:80
       orders: http://orders:80
+
+opentelemetry:
+  enabled: true
